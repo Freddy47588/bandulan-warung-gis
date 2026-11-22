@@ -6,7 +6,7 @@ Explore warung locations alongside roads, buildings, public facilities, and the 
 
 ## 🌐 Live Demo
 
-[🌐 Live Demo](https://freddy47588.github.io/bandulan-warung-gis/) · [🗺️ Interactive Map](https://freddy47588.github.io/bandulan-warung-gis/map/) · [💻 View Source](https://github.com/Freddy47588/bandulan-warung-gis)
+[🌐 Live Demo](https://bandulan-warung-gis.pages.dev/) · [🗺️ Interactive Map](https://bandulan-warung-gis.pages.dev/map/) · [💻 View Source](https://github.com/Freddy47588/bandulan-warung-gis)
 
 ## 🖼️ Preview
 
@@ -122,9 +122,9 @@ An internet connection is needed for OpenStreetMap tiles. The bundled spatial la
 
 ## ☁️ Deployment
 
-The project is compatible with GitHub Pages served from the repository root. In **Settings → Pages**, select the intended deployment branch and **/ (root)** as the publishing folder.
+The project is deployed on **Cloudflare Pages** as a static site (and also remains compatible with GitHub Pages from the repository root).
 
-The public site uses [Bandulan Warung GIS](https://freddy47588.github.io/bandulan-warung-gis/), with the interactive map under `map/`. Relative asset paths support this repository URL prefix. No backend, API key, or build command is required.
+The public site is hosted at [Bandulan Warung GIS](https://bandulan-warung-gis.pages.dev/), with the interactive map under `map/` ([bandulan-warung-gis.pages.dev/map/](https://bandulan-warung-gis.pages.dev/map/)). Relative asset paths work cleanly on any static host. No backend, API key, or build command is required.
 
 ## 🗃️ Data Sources & Attribution
 
