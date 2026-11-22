@@ -1,152 +1,157 @@
-# 🗺️ Bandulan Warung GIS
+# 🛰️ Bandulan Warung GIS v2
 
-**Interactive WebGIS for Local Business Mapping**
+**Satellite-First Spatial Intelligence WebGIS for Local Business & Urban Geography Analysis**
 
-Explore warung locations alongside roads, buildings, public facilities, and the surrounding landscape in Bandulan, Malang, Indonesia. Built with QGIS, qgis2web, Leaflet, and a custom static frontend.
+Explore local warungs and neighborhood shops alongside **3,157 clean 3D OpenStreetMap building footprints**, a complete **843-segment connected street network (67 km)**, **58 supporting community facilities**, **client-side Dijkstra street routing**, **3D catchment highlighting**, **clipped Voronoi territories**, **WebGL density heatmaps**, and **spatial insights** in **Kelurahan Bandulan, Kecamatan Sukun, Malang, Indonesia**.
 
-## 🌐 Live Demo
+Built with **Vite, React, TypeScript, Tailwind CSS v4, MapLibre GL JS, and Turf.js** — 100% static client-side architecture configured for **Cloudflare Pages**.
 
-[🌐 Live Demo](https://bandulan-warung-gis.pages.dev/) · [🗺️ Interactive Map](https://bandulan-warung-gis.pages.dev/map/) · [💻 View Source](https://github.com/Freddy47588/bandulan-warung-gis)
+---
 
 ## 🖼️ Preview
 
-![Bandulan map showing warung locations, roads, and the administrative boundary](images/map-preview.png)
+![Bandulan Warung GIS v2 Satellite 3D Spotlight Interface](public/images/map-preview-v2.png)
 
-Open the interactive map using the links above, or see the [original QGIS map layout](images/Layout_Peta_Bandulan.png).
+> Looking for the original cartographic deliverable? See the preserved [original QGIS thematic map layout](public/images/Layout_Peta_Bandulan.png) (also accessible inside the app's **About** modal).
 
-## 📌 Overview
+---
 
-Bandulan Warung GIS visualizes the spatial distribution of small local businesses in Kelurahan Bandulan, Kecamatan Sukun, Malang, East Java. It brings together business locations, the road network, land use, and public facilities in a browser-based map.
+## ✨ Key Capabilities
 
-The project connects spatial data preparation in QGIS with publication through qgis2web and Leaflet. A custom landing page and map dashboard present the results as a static website that can run on GitHub Pages without a backend or build pipeline.
+### Cartography & 3D Urban Visualization
+- **Satellite-First Map-First Experience:** Opens directly into a full-viewport WebGL map on **Esri World Imagery** with an **Inverted Spotlight Mask** that subtly dims surroundings outside Kelurahan Bandulan so the study area stands out immediately.
+- **Basemap-Adaptive Cartographic Themes:** Instant zero-flicker switching across **Satellite (Esri World Imagery)**, **Smart City Dark (Esri Dark Gray Canvas)**, **Editorial Light (Esri Light Gray Canvas)**, and **OpenStreetMap** — automatically adapting 3D building gradients, road contrast, label halos, spotlight tint, and MapLibre GL v5 **3D Sky & Horizon Fog**.
+- **Clean 3D Urban Massing:** Smooth camera tilt (`2D` ↔ `3D`) and WebGL `fill-extrusion` rendering over **3,157 individual OpenStreetMap building footprints** (replacing the original 250 jagged GeoAI blobs), 6 school campuses, and 5 factories.
+- **Category-Coded Markers & Progressive Reveal:** Warung beacons are color-coded by category (**Food & Eatery**, **Grocery / Toko**, **Coffee & Drinks**, **Fresh Produce**) with subtle size differentiation for provenance (**QGIS Survey** vs **OSM Mapped**), while the 58 supporting facility points fade in smoothly from `zoom >= 14.5` to keep overview views uncluttered.
+- **Collapsible Mini Legend & Haloed Street Labels:** One-click expandable legend chip at bottom-right paired with zoom-responsive street labels.
 
-## ✨ Features
+### Client-Side Spatial Intelligence (Turf.js + Dijkstra)
+1. **Catchment / Buffer Analysis (`100m` / `250m` / `500m`):** Select any warung to generate its service buffer, highlight intersecting 3D buildings in luminous emerald while dimming outside massing, count nearby buildings, facilities, schools, factories, green spaces, and neighboring warungs, and export results to **CSV** or **GeoJSON**.
+2. **Nearest Warung Finder (Dijkstra Road Routing + Straight Line):** Click anywhere on the map or use browser GPS to route along the real 843-segment Bandulan street graph using client-side binary-heap **Dijkstra shortest-path routing** with animated flowing route dashes, a pulsing origin pin, walking ETA, top-3 ranking, and instant toggle between **Road Route** and **Straight Line**.
+3. **Voronoi Service Territories & Coverage Gaps:** Partitions Kelurahan Bandulan into clipped Voronoi service territories across all 36 warungs (area, % share, building count) and highlights residential zones farthest from mapped businesses.
+4. **Spatial Insights Dashboard:** Slide-over analytics panel summarizing study area (`230.6 ha`), warung density & source split, road network breakdown (`67 km`), supporting facilities breakdown (`58`), land-use footprints, and **1-click CSV export**.
+5. **Interactive Measure Tool:** Click-to-measure multi-segment distances (`m` / `km`) and polygon areas (`m²` / `ha` + perimeter) with undo/clear controls.
+6. **Warung Density Heatmap:** One-click WebGL heatmap toggle to visualize local business clustering across Bandulan.
 
-- **Interactive map:** pan, zoom, reset the study-area view, and share map-view URLs.
-- **Warung discovery:** search ten locations by name or address, then open a feature card.
-- **Grouped layers:** toggle eleven spatial layers with a synchronized legend and feature counts.
-- **Feature details:** readable popups with English attribute labels, original place names, and empty values omitted.
-- **Measurement:** measure distances and areas in metric units.
-- **Map utilities:** locate yourself with browser permission, use a metric scale, or enter fullscreen where supported.
-- **Responsive interface:** a collapsible desktop sidebar, mobile layer drawer, and embedded landing-page preview.
-- **Keyboard support:** labeled controls, focus indicators, searchable results, and focusable warung markers.
-- **Bilingual interface:** Indonesian by default, with an accessible `ID | EN` selector on both pages. Language changes apply immediately and are remembered across navigation and future visits using local storage.
+### Exploration, Storytelling & Localization
+- **Global Cross-Layer Search & Filters:** Filter warungs by source (**QGIS Survey** vs **OSM Mapped**) and category, or search across warungs, roads, schools, factories, supporting facilities, and green spaces.
+- **5-Chapter Guided Story Mode:** One-click narrative tour orchestrating camera transitions, 2D/3D shifts, layer states, 250m catchment highlights, and clipped Voronoi territories.
+- **Bilingual (`EN | ID`) & Shareable URL State:** Defaults to **English (`en`)** with instant switching to **Indonesian (`id`)** (`localStorage` + `?lang=`), synchronizing camera position, pitch, basemap, 3D mode, selected warung, and active spatial tool into shareable URLs.
 
-## 🧭 Spatial Data Layers
+---
 
-Counts represent features in the bundled datasets, rather than a complete inventory of the area.
+## 🧭 Spatial Datasets (12 Layers)
 
-| Layer | Geometry | Features | Dataset |
-| --- | --- | ---: | --- |
-| Warung Locations | Point | 10 | `LokasiWarung_11.js` |
-| Bandulan Boundary | MultiPolygon | 1 | `BatasKelurahan_1.js` |
-| Village Roads | MultiLineString | 39 | `JalanDesa_10.js` |
-| Residential Roads | MultiLineString | 23 | `JalanPerumahan_9.js` |
-| Alleys | MultiLineString | 52 | `JalanGang_8.js` |
-| Buildings | MultiPolygon | 250 | `Bangunan_4.js` |
-| Residential Areas | MultiPolygon | 15 | `Pemukiman_2.js` |
-| Green Spaces | MultiPolygon | 4 | `LahanTerbukaHijau_5.js` |
-| Schools | MultiPolygon | 6 | `Sekolah_3.js` |
-| Factories | MultiPolygon | 5 | `Pabrik_6.js` |
-| Rivers | MultiLineString | 2 | `Sungai_7.js` |
+All 12 layers are stored as validated RFC 7946 GeoJSON files under [`public/data/`](public/data/):
 
-Datasets live in [`map/data/`](map/data/) as JavaScript-wrapped GeoJSON. Original Indonesian filenames, attributes, place names, coordinates, and geometries are retained.
+| Layer | Geometry | Features | Source | Dataset |
+| --- | --- | ---: | --- | --- |
+| Warungs & Local Shops | Point | 36 | 10 QGIS Survey + 26 OSM | `warungs.geojson` |
+| Bandulan Boundary | MultiPolygon | 1 | QGIS | `boundary.geojson` |
+| Main / Arterial Roads | LineString | 6 | OpenStreetMap | `village-roads.geojson` |
+| Residential Streets | LineString | 284 | OpenStreetMap | `residential-roads.geojson` |
+| Alleys & Paths | LineString | 553 | OpenStreetMap | `alleys.geojson` |
+| Buildings *(3D)* | Polygon | 3,157 | OpenStreetMap | `buildings.geojson` |
+| Residential Zones | MultiPolygon | 15 | QGIS (+ Turf.js areas) | `residential-areas.geojson` |
+| Green Spaces | MultiPolygon | 4 | QGIS | `green-spaces.geojson` |
+| Schools *(3D)* | MultiPolygon | 6 | QGIS | `schools.geojson` |
+| Factories *(3D)* | MultiPolygon | 5 | QGIS | `factories.geojson` |
+| Supporting Facilities | Point | 58 | OpenStreetMap (32 worship, 11 education, 8 health, 7 civic) | `amenities.geojson` |
+| Rivers | MultiLineString | 2 | QGIS | `rivers.geojson` |
+
+### Data Provenance & Transparency
+
+- **Hybrid QGIS + OpenStreetMap Pipeline:** Original QGIS survey layers (`boundary`, `warungs` survey, `schools`, `factories`, `green-spaces`, `residential-areas`, `rivers`) are normalized via [`scripts/prepare-geojson.mjs`](scripts/prepare-geojson.mjs) and enriched with real OpenStreetMap features clipped strictly to Kelurahan Bandulan's boundary via [`scripts/enrich-osm.mjs`](scripts/enrich-osm.mjs).
+- **GeoAI Building Replacement:** The original 250 GeoAI building polygons (median 43 vertices, up to 666 vertices per polygon, missing southern Bandulan) were replaced with **3,157 clean OpenStreetMap building footprints** (median ≤ 10 vertices) covering the entire Kelurahan.
+- **Transparent Tagging:** Every warung is labeled `QGIS Survey` or `OSM Mapped`. 3D building heights use OSM `building:levels` where tagged and schematic heights (`4.5–12 m`) elsewhere for illustrative urban massing.
+
+---
 
 ## 🛠️ Technology Stack
 
-| Technology | Role |
+| Layer | Technology |
 | --- | --- |
-| QGIS | Spatial data preparation and cartographic layout |
-| qgis2web | Export of QGIS layers to a browser-based map |
-| Leaflet.js | Interactive rendering, layers, popups, and map controls |
-| OpenStreetMap | Basemap tiles |
-| HTML, CSS, JavaScript | Custom static landing page and map interface |
-| GitHub Pages | Static hosting |
+| Mapping & 3D WebGL | MapLibre GL JS v5 |
+| Spatial Analysis & Routing | Modular Turf.js v7 (`@turf/*`) + Client-side Binary-Heap Dijkstra |
+| Frontend & UI | React 19, TypeScript, Tailwind CSS v4, Lucide Icons |
+| Build & Test | Vite 6, Vitest |
+| Hosting | Cloudflare Pages (static `dist/` + `_redirects` & `_headers`) |
+| Data Sources | QGIS + OpenStreetMap (ODbL) |
 
-The frontend uses local CSS and JavaScript without a framework, CSS CDN, or package installation step. Existing qgis2web dependencies remain bundled in `map/`.
-
-## 🔄 Project Workflow
-
-QGIS → Spatial Data Preparation → qgis2web Export → Leaflet WebGIS → Custom Frontend Enhancement → GitHub Pages
-
-The qgis2web export supplies the spatial layers and mapping foundation. Separate custom styles and scripts provide the portfolio presentation, layer metadata, search, and responsive controls.
+---
 
 ## 📁 Project Structure
 
 ```text
 bandulan-warung-gis/
-├── index.html                # Portfolio landing page
-├── README.md
-├── assets/
-│   ├── css/
-│   │   ├── shared.css        # Shared design tokens and controls
-│   │   └── landing.css       # Landing-page layout
-│   ├── js/
-│   │   ├── landing.js        # Responsive navigation
-│   │   └── i18n.js           # Shared Indonesian/English dictionary and selector
+├── index.html
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+├── public/
+│   ├── _headers                      # Cloudflare Pages cache & security headers
+│   ├── _redirects                    # SPA fallback routing
 │   ├── favicon.svg
-│   └── icons.svg             # Shared line-icon sprite
-├── images/
-│   ├── Layout_Peta_Bandulan.png
-│   └── map-preview.png       # Screenshot of the interactive map
-└── map/
-    ├── index.html            # App shell and qgis2web initialization
-    ├── data/                 # Original spatial datasets
-    ├── css/map.css           # Custom map presentation
-    ├── js/
-    │   ├── map-config.js     # Layer labels, colors, and field metadata
-    │   ├── map-ui.js         # Sidebar, search, popups, and controls
-    │   └── map-i18n.js       # Translation of bundled map controls
-    ├── images/
-    ├── legend/
-    └── webfonts/
+│   ├── data/                         # 12 validated RFC 7946 GeoJSON datasets
+│   └── images/
+│       ├── Layout_Peta_Bandulan.png  # Preserved original QGIS thematic layout
+│       └── map-preview-v2.png        # v2 Satellite 3D spotlight preview
+├── scripts/
+│   ├── prepare-geojson.mjs           # Reproducible QGIS export -> GeoJSON pipeline
+│   └── enrich-osm.mjs                # 3x3 tiled OpenStreetMap extractor & boundary clipper
+├── src/
+│   ├── data/                         # Layer catalog & parallel GeoJSON loader
+│   ├── spatial/                      # Pure Turf.js modules + Dijkstra road router + global search
+│   ├── map/                          # MapLibre basemaps, adaptive themes, layer styles & MapCanvas
+│   ├── state/                        # App state context & shareable URL sync
+│   ├── i18n/                         # EN (default) & ID localization
+│   ├── story/                        # 5-chapter Story Mode definitions
+│   ├── utils/                        # CSV & GeoJSON export helpers
+│   └── components/                   # Floating glassmorphic HUD & MiniLegend
+└── tests/                            # Vitest GeoJSON integrity, Turf.js & Dijkstra routing tests
 ```
 
-The `map/css/` and `map/js/` directories also contain the existing qgis2web and third-party dependencies. Custom files are separate from those libraries. Re-exporting from QGIS may overwrite `map/index.html`; preserve its app shell, attribution, and custom-script integration when updating the export.
-
-The shared translation dictionary uses semantic keys and Indonesian HTML fallbacks. Only interface labels are translated; geographic names, addresses, dataset properties, and spatial files stay unchanged. The embedded map follows the selected language. If browser storage is unavailable, language switching still works for the current page and its embedded preview, but the preference cannot be remembered across visits. This README remains English.
+---
 
 ## 🚀 Running Locally
 
-Clone the repository and start a local HTTP server from its root. Python 3 is sufficient; no package installation or build step is needed.
+Requires **Node.js 20+**.
 
-```sh
-git clone https://github.com/Freddy47588/bandulan-warung-gis.git
-cd bandulan-warung-gis
-python -m http.server 8000
+```bash
+npm install
+npm run dev
 ```
 
-Open the [landing page](http://localhost:8000/) or the [interactive map](http://localhost:8000/map/).
+### Verification & Data Pipeline Commands
 
-An internet connection is needed for OpenStreetMap tiles. The bundled spatial layers remain available if tiles fail to load. Location access requires browser permission and a secure context such as HTTPS or localhost. Fullscreen availability depends on the browser and embedding context.
+```bash
+npm run typecheck      # Strict TypeScript check
+npm test               # GeoJSON integrity, Turf.js spatial & Dijkstra routing tests
+npm run build          # Production build into dist/
+npm run preview        # Preview production build locally
+npm run prepare:data   # Re-convert base QGIS exports from git history
+npm run enrich:osm     # Refresh & clip OpenStreetMap roads, buildings, warungs & amenities
+```
 
-## ☁️ Deployment
+---
 
-The project is deployed on **Cloudflare Pages** as a static site (and also remains compatible with GitHub Pages from the repository root).
+## ☁️ Cloudflare Pages Deployment
 
-The public site is hosted at [Bandulan Warung GIS](https://bandulan-warung-gis.pages.dev/), with the interactive map under `map/` ([bandulan-warung-gis.pages.dev/map/](https://bandulan-warung-gis.pages.dev/map/)). Relative asset paths work cleanly on any static host. No backend, API key, or build command is required.
+Configured for direct **Cloudflare Pages** root-domain deployment:
 
-## 🗃️ Data Sources & Attribution
+- **Framework preset:** Vite
+- **Build command:** `npm run build`
+- **Build output directory:** `dist`
+- **Routing & caching:** Handled automatically via [`public/_redirects`](public/_redirects) and [`public/_headers`](public/_headers).
 
-- [QGIS](https://qgis.org/) is the GIS authoring tool used for spatial preparation and the original map layout.
-- [qgis2web](https://github.com/qgis2web/qgis2web) provides the web export tooling.
-- [Leaflet](https://leafletjs.com/) provides the browser mapping library.
-- Basemap data is © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright). Attribution is displayed on the map while the basemap is active.
+No backend server, database, or basemap API key is required.
 
-The spatial layers are preserved from the existing project export. Complete per-layer provenance, collection dates, and reuse terms are not documented in this repository. The project does not claim ownership of third-party geographic data; verify its source and permissions before redistribution or reuse.
+---
 
-## 🎯 Project Background
+## 🗃️ Attribution
 
-This project demonstrates a GIS publication workflow: preparing spatial layers, designing a thematic map, exporting it to the web, and presenting the result as a portfolio application. Its focus is the relationship between local businesses and their geographic context in Bandulan.
-
-## 🔮 Future Improvements
-
-- Spatial filtering by area and proximity to roads or facilities.
-- More detailed warung information and documented update dates.
-- Business category filters and summary analytics.
-- Further accessibility testing across browsers and assistive technologies.
-- Clearer dataset provenance and licensing documentation.
-
-## 📄 License
-
-No project-wide license file is currently included. This README does not grant a blanket reuse license for the application or spatial datasets. Third-party libraries and geographic data remain subject to their respective licenses and terms.
+- Original thematic mapping prepared with [QGIS](https://qgis.org/).
+- Interactive WebGL rendering powered by [MapLibre GL JS](https://maplibre.org/).
+- Spatial analysis powered by [Turf.js](https://turfjs.org/).
+- Vector enrichment & road network data © [OpenStreetMap contributors](https://www.openstreetmap.org/copyright) (ODbL).
+- Basemap imagery & canvas tiles © Esri World Imagery, Esri Dark/Light Gray Canvas, and OpenStreetMap contributors.
