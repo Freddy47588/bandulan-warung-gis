@@ -4,7 +4,13 @@
 
 Explore local warungs and neighborhood shops alongside **3,157 clean 3D OpenStreetMap building footprints**, a complete **843-segment connected street network (67 km)**, **58 supporting community facilities**, **client-side Dijkstra street routing**, **3D catchment highlighting**, **clipped Voronoi territories**, **WebGL density heatmaps**, and **spatial insights** in **Kelurahan Bandulan, Kecamatan Sukun, Malang, Indonesia**.
 
-Built with **Vite, React, TypeScript, Tailwind CSS v4, MapLibre GL JS, and Turf.js** — 100% static client-side architecture configured for **Cloudflare Pages**.
+Built with **Vite, React, TypeScript, Tailwind CSS v4, MapLibre GL JS, and Turf.js** — 100% static client-side architecture deployed on **Cloudflare Pages**.
+
+---
+
+## 🌐 Live Demo
+
+[🌐 Live App (Cloudflare Pages)](https://bandulan-warung-gis.pages.dev/) · [💻 View Source](https://github.com/Freddy47588/bandulan-warung-gis)
 
 ---
 
@@ -137,7 +143,7 @@ npm run enrich:osm     # Refresh & clip OpenStreetMap roads, buildings, warungs 
 
 ## ☁️ Cloudflare Pages Deployment
 
-Configured for direct **Cloudflare Pages** root-domain deployment:
+Hosted at [bandulan-warung-gis.pages.dev](https://bandulan-warung-gis.pages.dev/) with automatic root-domain deployment from `main`:
 
 - **Framework preset:** Vite
 - **Build command:** `npm run build`
